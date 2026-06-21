@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱游戏体育 · 观赛与体验之窗</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #fce9d8 0%, #f7d5bc 50%, #f3c4a3 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .card {
+      max-width: 860px;
+      width: 100%;
+      background: #fefaf6;
+      border-radius: 40px 40px 32px 32px;
+      box-shadow: 0 20px 40px rgba(160, 100, 60, 0.18), 0 8px 20px rgba(120, 70, 30, 0.08);
+      padding: 2.8rem 2.5rem 3rem;
+      transition: all 0.2s ease;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .card { padding: 2rem 1.5rem 2.2rem; border-radius: 28px; }
+    }
+
+    /* 开场短句 — 温和的引子 */
+    .opener {
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      color: #5b3c26;
+      border-left: 4px solid #d9a77c;
+      padding-left: 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .opener span {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 1rem;
+      color: #8f6b4e;
+      opacity: 0.8;
+    }
+
+    /* 承接段落 */
+    .intro-text {
+      color: #3f2b1d;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      padding: 0.25rem 0;
+    }
+
+    .intro-text a {
+      color: #b46538;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border 0.2s, color 0.2s;
+    }
+
+    .intro-text a:hover {
+      color: #8a4d2a;
+      border-bottom-color: #b46538;
+    }
+
+    /* 特点列表 — 圆形柔和卡片 */
+    .feature-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem 1.5rem;
+      margin: 2.2rem 0 2rem;
+    }
+
+    .feature-item {
+      flex: 1 1 180px;
+      background: #fff9f3;
+      border-radius: 60px 16px 16px 60px;  /* 左侧圆角大，有“按钮感” */
+      padding: 1rem 1.4rem 1rem 1.8rem;
+      box-shadow: 0 3px 6px rgba(170, 110, 60, 0.06);
+      border: 1px solid #eddccc;
+      transition: transform 0.15s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(150, 100, 55, 0.12);
+      border-color: #d6b69b;
+    }
+
+    .feature-icon {
+      font-size: 1.6rem;
+      margin-right: 0.75rem;
+      line-height: 1;
+      color: #b67c56;
+    }
+
+    .feature-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-label {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #482f1d;
+      letter-spacing: 0.02em;
+    }
+
+    .feature-desc {
+      font-size: 0.85rem;
+      color: #7b5b40;
+      line-height: 1.4;
+      margin-top: 0.1rem;
+    }
+
+    /* 温和的提醒卡片 */
+    .notice-block {
+      background: #f3ece4;
+      border-radius: 28px;
+      padding: 1.6rem 1.8rem;
+      margin-top: 1.2rem;
+      margin-bottom: 1.8rem;
+      box-shadow: inset 0 1px 3px rgba(140, 90, 50, 0.04);
+    }
+
+    .notice-block h3 {
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: #543a26;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .notice-block p {
+      color: #3f2d1e;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+
+    .notice-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .notice-block a {
+      color: #b46538;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border 0.2s;
+    }
+
+    .notice-block a:hover {
+      border-bottom-color: #b46538;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      border-top: 1px dashed #dac6b4;
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .faq-q {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: #3f2b1d;
+    }
+
+    .faq-q .marker {
+      background: #dbb696;
+      color: #2f1f13;
+      font-weight: 600;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 40px;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .faq-q .q-text {
+      font-weight: 500;
+    }
+
+    .faq-q .a-text {
+      color: #6b4f37;
+      font-weight: 400;
+    }
+
+    .faq-q a {
+      color: #b46538;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border 0.2s;
+    }
+
+    .faq-q a:hover {
+      border-bottom-color: #b46538;
+    }
+
+    /* 温和结尾 */
+    .gentle-footer {
+      margin-top: 2.4rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid #e7d6c6;
+      text-align: center;
+      color: #6b503b;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .gentle-footer small {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #987a61;
+      opacity: 0.7;
+    }
+
+    /* 纯装饰 — 温和的无痕引用 */
+    .quiet-note {
+      background: #fcf6ef;
+      border-radius: 40px 8px 40px 8px;
+      padding: 0.8rem 1.4rem;
+      margin: 1.6rem 0 0.8rem;
+      display: inline-block;
+      font-size: 0.9rem;
+      color: #4f3927;
+      border: 1px solid #e5d2bf;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- 开场短句 -->
+    <div class="opener">
+      感受体育的脉搏，从一次安静的浏览开始。
+      <span>—— 简明指南 · 温和提醒</span>
+    </div>
+
+    <!-- 承接段落：自然融入链接 -->
+    <div class="intro-text">
+      如果你是第一次了解体育资讯平台，或许会觉得信息纷繁、选择太多。其实只需一个熟悉的起点：<a href="https://ayxsport-chinese.com">爱游戏体育</a> 提供了较为清晰的赛事浏览方式，没有过多干扰。页面结构偏重实用，你可以按自己的节奏查看赛事、比分与动态，而不必被推送通知打扰。
+    </div>
+
+    <div class="intro-text">
+      以下梳理了几个常见的使用场景与特点，帮助你更快适应这里的节奏。当然，每个人的习惯不同，找到让自己舒服的浏览方式才是最重要的。
+    </div>
+
+    <!-- 特点列表 (有按钮感的圆角卡片) -->
+    <div class="feature-grid">
+      <div class="feature-item">
+        <span class="feature-icon">⚙️</span>
+        <div class="feature-content">
+          <span class="feature-label">简洁导航</span>
+          <span class="feature-desc">主要分类清晰，不堆砌菜单</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📋</span>
+        <div class="feature-content">
+          <span class="feature-label">赛程总览</span>
+          <span class="feature-desc">列表呈现，日期与状态一目了然</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🔍</span>
+        <div class="feature-content">
+          <span class="feature-label">信息索引</span>
+          <span class="feature-desc">关键词查找，减少重复翻页</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📱</span>
+        <div class="feature-content">
+          <span class="feature-label">响应适配</span>
+          <span class="feature-desc">手机与桌面阅读体验均衡</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 访问提醒 (温和、克制的提示) -->
+    <div class="notice-block">
+      <h3>☕ 一点提醒</h3>
+      <p>
+        初次访问 <a href="https://ayxsport-chinese.com">爱游戏体育</a> 时，建议先花几分钟翻看页面结构，了解赛程与资讯的排布方式。部分内容可能需要稳定网络环境加载，如果遇到图片或比分延迟，稍作等待或刷新即可。
+      </p>
+      <p>
+        平台不强制注册即可浏览大部分页面，不过有些个性化功能（如收藏赛事）会提示登录，按需使用就好。不必急于一次看完全部，体育的魅力在于慢慢品味。
+      </p>
+    </div>
+
+    <!-- FAQ 摘要 (简短，不冗长) -->
+    <div class="faq-mini">
+      <div class="faq-q">
+        <span class="marker">Q1</span>
+        <span class="q-text">是否需要安装软件？</span>
+        <span class="a-text">—— 不需要，直接通过浏览器访问 <a href="https://ayxsport-chinese.com">爱游戏体育</a> 即可。</span>
+      </div>
+      <div class="faq-q">
+        <span class="marker">Q2</span>
+        <span class="q-text">如何查看过往赛事结果？</span>
+        <span class="a-text">—— 页面通常提供“历史”或“完赛”筛选，点击即可回溯。</span>
+      </div>
+      <div class="faq-q">
+        <span class="marker">Q3</span>
+        <span class="q-text">遇到加载缓慢怎么办？</span>
+        <span class="a-text">—— 可尝试刷新页面或更换网络环境，部分素材会按需加载。</span>
+      </div>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="gentle-footer">
+      <p>希望这份简短的介绍能让你更从容地开始。无论你是长期关注体育，还是偶尔看看比分，一个顺手的工具总能带来更好的体验。</p>
+      <div class="quiet-note">
+        🏃 慢慢来，比赛一直都在。
+      </div>
+      <small>—— 仅作信息参考，请根据个人情况合理安排上网时间。</small>
+    </div>
+
+  </div>
+</body>
+</html>
